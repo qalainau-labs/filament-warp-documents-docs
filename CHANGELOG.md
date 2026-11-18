@@ -2,6 +2,24 @@
 
 All notable changes to `qalainau/filament-warp-documents` are documented in this file.
 
+## [Unreleased]
+
+## [1.0.1] - 2026-11-18
+
+### Security
+
+- A person in one team could read the name of anyone in another team. The document page and *My document tasks* had a public Livewire method `userName($id)` that the browser could call with any user id, and `WarpDocuments::userName()` did not look at the team. The method is no longer callable from the browser, and in a panel with Filament tenancy a name is shown only for people who can enter the current team (`canAccessTenant()`); anyone else shows as blank. Panels without tenancy are unchanged.
+- The same fix closes `pageHtml()` and `fileUrl()` on the document page and `fileUrl()` on *Compare revisions*: the browser could call them with the id of any revision (Livewire looks the model up from the id), and `pageHtml()` returned the content of a revision of another document, including a draft the person may not read. They are no longer callable from the browser (your own views that extend these pages can still use them from Blade).
+- “Mark as reviewed” now needs the `update` ability of your own document policy as well as being the owner or a manager. An owner whom your policy keeps read-only no longer sees the button, and calling the action directly (or `Lifecycle::markReviewed()`) is refused, so `reviewed_at` no longer changes.
+- Every other action that changes a document — check out, check in (save draft), cancel check-out, submit, withdraw, make obsolete, delete, recall a controlled copy, remind readers, add missing readers — now also needs the `update` ability of your own document policy, in addition to being the owner or a manager. For an owner your policy keeps read-only, the buttons are hidden and calling them directly is refused. Approve, send back, acknowledge and print a controlled copy are unchanged: they depend on being an approver or a reader, not on editing the document.
+
+### Fixed
+
+- Working out who may read a restricted document (on the document page's reader tab, for instance) no longer lazy-loads the document type when it was not loaded yet.
+- The documents list no longer throws a lazy-loading error (500) in apps that call `Model::preventLazyLoading()` when a document sits in a nested folder: the folder path is now built without lazy-loading the parent folders.
+- Filament's global search no longer throws a lazy-loading error (500) in apps that call `Model::preventLazyLoading()` when two or more documents match: the document type is now loaded together with the results.
+- My document work ("to read" and "copies to recall" tabs) no longer loads each revision's document and type one by one, which raised an error in apps that call `Model::preventLazyLoading()` or `Model::shouldBeStrict()`.
+
 ## [1.0.0] - 2026-11-16
 
 ### Added
