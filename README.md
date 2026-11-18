@@ -620,7 +620,7 @@ Both are added to the existing rules with *and*: `canViewReadMatrixUsing()` and 
 Documents, types and folders are resources: who may open, create, change and approve them is decided by your policies and by `canManageUsing()`, `canCreateUsing()` and `canImportUsing()` as described above — including the pages inside the document resource (*Compare revisions*, *Edit content* and *Import documents*).
 
 
-**Your own policies count too.** When your app has a policy for a model of this plugin, document types and folders (`viewAny`), creating a document (`create`), opening it and its files, renditions and print view (`view`), and editing it (`update`) also asks it, together with the plugin's own options — so a role that may not use the screen gets a 403 there too. Without a policy nothing changes (also with Filament's `strictAuthorization()`).
+**Your own policies count too.** When your app has a policy for a model of this plugin, document types and folders (`viewAny`), creating a document (`create`), opening it and its files, renditions and print view (`view`), editing it (`update`), and listing it in `RelatedDocuments` and in the *Documents* relation manager (its rows and the documents you can link, `view`) also asks it, together with the plugin's own options — so a role that may not use the screen gets a 403 there too. Without a policy nothing changes (also with Filament's `strictAuthorization()`).
 
 ### Groups
 

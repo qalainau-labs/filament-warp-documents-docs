@@ -4,6 +4,12 @@ All notable changes to `qalainau/filament-warp-documents` are documented in this
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-11-18
+
+### Security
+
+- The related documents shown by `RelatedDocuments`, the rows of `DocumentsRelationManager`, and the documents you can link there now also ask the `view` ability of your own document policy, in addition to the plugin's own reader rules. A document your policy keeps from a person is no longer listed for them, no longer offered when linking, and cannot be linked by sending its id to the *Link* action directly. Without a policy nothing changes. The list of documents you can link still shows up to 50 matches, even when many of the first ones are refused by your policy.
+
 ## [1.0.1] - 2026-11-18
 
 ### Security
