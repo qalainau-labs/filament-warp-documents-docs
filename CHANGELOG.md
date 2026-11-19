@@ -2,6 +2,14 @@
 
 All notable changes to `qalainau/filament-warp-documents` are documented in this file.
 
+## [Unreleased]
+
+## [1.0.4] - 2026-11-20
+
+### Fixed
+
+- **Console error `warpDocuments is not defined`**: on pages where Livewire re-renders a document page inside another Alpine component, the browser console could show `warpDocuments is not defined` before the component's script had arrived. Empty components are now registered up front, and the real ones replace them as soon as they load. No visible change.
+
 ## [1.0.3] - 2026-11-19
 
 ### Fixed
