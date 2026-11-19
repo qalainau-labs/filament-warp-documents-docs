@@ -2,7 +2,11 @@
 
 All notable changes to `qalainau/filament-warp-documents` are documented in this file.
 
-## [Unreleased]
+## [1.0.3] - 2026-11-19
+
+### Fixed
+
+- Opening or downloading the file (or the PDF rendition) of a version whose file is no longer on the disk answered a server error (500). It now answers "Not found" (404), and no download is recorded.
 
 ## [1.0.2] - 2026-11-18
 
